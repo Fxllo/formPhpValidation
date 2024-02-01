@@ -187,22 +187,22 @@ $html = "
     <button name=clear class=clearForm>Clear Form</button>
     <table>
         <tr>
-            <td>
+            <th>
                 <input type=text name=name value=$name> Name
-            </td>
-            <td>
+            </th>
+            <th>
                 <input type=text name=surname value=$surname> Surname
-            </td>
-            <td>
+            </th>
+            <th>
                 <input type=text name=class value=$class> Class
-            </td>
-            <td>
+            </th>
+            <th>
                 <select name=opz>
                     <option value=ko></option>
                     $options
                 </select>
                 Indirizzo
-            </td>
+            </th>
         </tr>
         $content
     </table>
