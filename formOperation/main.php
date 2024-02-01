@@ -33,22 +33,11 @@ foreach ($rows as $row) {
         . "<td>" . $row["ind"] . "</td>"
         . "<td class='select'> <a href='details.php?id=" . $row['id'] . "' target='_blank' class='selectButton'>Details</a> 
                 <a href='update.php?id=" . $row['id'] . "' target='_blank' class='selectButton'>Update</a>
-                <a href='main.php?id=" . $row['id'] . "' class='selectButton' id='confirmDelete'>Delete</a>
+                <a href='delete.php?id=" . $row['id'] . "' class='selectButton'>Delete</a>
         </td>";
 };
 
 if(isset($_POST['clear'])){ $name = $surname = $class = $indirizzoFilter = ""; }
-
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $sql = "DELETE FROM student WHERE id=$id";
-    if (mysqli_query($conn, $sql)) {
-        header("Location: " . $_SERVER['PHP_SELF']);
-        exit;
-    } else {
-        echo "Errore durante l'eliminazione del record: " . mysqli_error($conn);
-    }
-}
 
 $indirizzi = mysqli_query($conn, "SELECT DISTINCT ind FROM student");
 $indirizzi = mysqli_fetch_all($indirizzi, MYSQLI_ASSOC);
@@ -187,22 +176,22 @@ $html = "
     <button name=clear class=clearForm>Clear Form</button>
     <table>
         <tr>
-            <th>
+            <td>
                 <input type=text name=name value=$name> Name
-            </th>
-            <th>
+            </td>
+            <td>
                 <input type=text name=surname value=$surname> Surname
-            </th>
-            <th>
+            </td>
+            <td>
                 <input type=text name=class value=$class> Class
-            </th>
-            <th>
+            </td>
+            <td>
                 <select name=opz>
                     <option value=ko></option>
                     $options
                 </select>
                 Indirizzo
-            </th>
+            </td>
         </tr>
         $content
     </table>
