@@ -39,17 +39,6 @@ foreach ($rows as $row) {
 
 if(isset($_POST['clear'])){ $name = $surname = $class = $indirizzoFilter = ""; }
 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $sql = "DELETE FROM student WHERE id=$id";
-    if (mysqli_query($conn, $sql)) {
-        header("Location: " . $_SERVER['PHP_SELF']);
-        exit;
-    } else {
-        echo "Errore durante l'eliminazione del record: " . mysqli_error($conn);
-    }
-}
-
 $indirizzi = mysqli_query($conn, "SELECT DISTINCT ind FROM student");
 $indirizzi = mysqli_fetch_all($indirizzi, MYSQLI_ASSOC);
 
