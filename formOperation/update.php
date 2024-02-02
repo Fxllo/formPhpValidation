@@ -1,20 +1,19 @@
 <?php
 $conn = mysqli_connect("localhost", "root", "", "formOperationPhp");
 $name = $surname = $class = $indirizzo = $email = $phoneNumber = $id = "";
+$checkErrorForm = false;
 if(isset($_GET['id'])){
     $id = $_GET['id'];
     $sql = "SELECT * FROM student WHERE id = ". $id . "";
     
     $result = mysqli_query($conn, $sql);
     $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    foreach ($rows as $row) {
-        $name = $row["name"];
-        $surname = $row["surname"];
-        $class = $row["class"];
-        $indirizzo = $row["ind"];
-        $email = $row["email"];
-        $phoneNumber = $row["phoneNumber"];
-    };
+    $name = $rows[0]["name"];
+    $surname = $rows[0]["surname"];
+    $class = $rows[0]["class"];
+    $indirizzo = $rows[0]["ind"];
+    $email = $rows[0]["email"];
+    $phoneNumber = $rows[0]["phoneNumber"];
 }
 
 
@@ -29,36 +28,43 @@ foreach ($indirizzi as $row) {
 
 if(isset($_POST['update'])){
     $id = $_POST['id'];
-    if (!empty($_POST["name"])) {
+    if (!empty($_POST["name"]))
         $name = $_POST["name"];
-    }
+    else
+        $checkErrorForm = true;
     
-    if ( !empty($_POST["surname"])) {
+    if ( !empty($_POST["surname"])) 
         $surname = $_POST["surname"];
-    }
+    else
+        $checkErrorForm = true;
     
-    if ( !empty($_POST["class"])) {
+    if ( !empty($_POST["class"]))
         $class = $_POST["class"];
-    }
+    else
+        $checkErrorForm = true;
     
-    if ($_POST["opz"] !== ""  || !empty($_POST["opz"])) {
+    if ($_POST["opz"] !== ""  || !empty($_POST["opz"]))
         $indirizzo = $_POST["opz"];
-    }
+    else
+        $checkErrorForm = true;
 
-    if (!empty($_POST["email"])) {
+    if (!empty($_POST["email"]))
         $email = $_POST["email"];
-    }
+    else
+        $checkErrorForm = true;
 
-    if (!empty($_POST["phoneNumber"]) || !empty($_POST["phoneNumber"])) {
+    if (!empty($_POST["phoneNumber"]) || !empty($_POST["phoneNumber"]))
         $phoneNumber = $_POST["phoneNumber"];
-    }
+    else 
+        $checkErrorForm = true;
 
-    $sql = "UPDATE student SET name ='$name', surname='$surname', class='$class', ind='$indirizzo', email='$email', phoneNumber='$phoneNumber' WHERE id='$id'";
-    if (mysqli_query($conn, $sql)) {
-        header("Location: main.php");
-        exit;
-    } else {
-        echo "Errore durante l'eliminazione del record: " . mysqli_error($conn);
+    if (!$checkErrorForm) {
+        $sql = "UPDATE student SET name ='$name', surname='$surname', class='$class', ind='$indirizzo', email='$email', phoneNumber='$phoneNumber' WHERE id='$id'";
+        if (mysqli_query($conn, $sql)) {
+            header("Location: main.php");
+            exit;
+        } else
+            echo "Errore durante l'eliminazione del record: " . mysqli_error($conn);
     }
 }
 
@@ -129,26 +135,26 @@ $html = "
     <table>
         <tr>
             <td>
-                <input type=text name=name value=$name> Name
+                <input type=text name=name value=$name required> Name
             </td>
             <td>
-                <input type=text name=surname value=$surname> Surname
+                <input type=text name=surname value=$surname required> Surname
             </td>
             <td>
-                <input type=text name=class value=$class> Class
+                <input type=text name=class value=$class required> Class
             </td>
             <td>
                 <select name=opz>
-                    <option value=$indirizzo></option>
+                    <option value=$indirizzo required></option>
                     $options
                 </select>
                 Indirizzo
             </td>   
             <td>
-                <input type=text name=email value=$email> Email
+                <input type=text name=email value=$email required> Email
             </td>
             <td>
-                <input type=text name=phoneNumber value=$phoneNumber> Phone Number
+                <input type=text name=phoneNumber value=$phoneNumber required> Phone Number
             </td>
         </tr>
     </table>

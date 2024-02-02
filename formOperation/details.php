@@ -6,17 +6,14 @@ $sql = "SELECT * FROM student WHERE id = ". $id . "";
 $result = mysqli_query($conn, $sql);
 $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-$content = "";
-foreach ($rows as $row) {
-    $content .= "<tr>";
-    $content .= "<td>" . $row["name"] . "</td>"
-        . "<td>" . $row["surname"] . "</td>"
-        . "<td>" . $row["class"] . "</td>"
-        . "<td>" . $row["ind"] . "</td>"
-        . "<td>" . $row["email"] . "</td>"
-        . "<td>" . $row["phoneNumber"] . "</td>"
-        . "</tr>";
-};
+$content .= "<tr>";
+$content .= "<td>" . $rows[0]["name"] . "</td>"
+    . "<td>" . $rows[0]["surname"] . "</td>"
+    . "<td>" . $rows[0]["class"] . "</td>"
+    . "<td>" . $rows[0]["ind"] . "</td>"
+    . "<td>" . $rows[0]["email"] . "</td>"
+    . "<td>" . $rows[0]["phoneNumber"] . "</td>"
+    . "</tr>";
 
 $html = "
     <html>
