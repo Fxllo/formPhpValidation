@@ -127,9 +127,25 @@ $html = "
     input[type=submit]:hover, input[type=button]:hover {
         background-color: #45a049;
     }
+    .back-button {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 10px 20px;
+        background-color: #fff;
+        color: #333;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+    .back-button:hover {
+        background-color:#d4d4d4;
+    }
 </style>
 </head>
 <body>
+<a href='main.php' class='back-button'> Back to hub </a> 
 <form action=update.php method=POST>
 <input type=hidden name=id value=$id>
     <table>

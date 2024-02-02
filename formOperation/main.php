@@ -31,9 +31,9 @@ foreach ($rows as $row) {
         . "<td>" . $row["surname"] . "</td>"
         . "<td>" . $row["class"] . "</td>"
         . "<td>" . $row["ind"] . "</td>"
-        . "<td class='select'> <a href='details.php?id=" . $row['id'] . "' target='_blank' class='selectButton'>Details</a> 
-                <a href='update.php?id=" . $row['id'] . "' target='_blank' class='selectButton'>Update</a>
-                <a href='main.php?id=" . $row['id'] . "' class='selectButton' id='confirmDelete'>Delete</a>
+        . "<td class='select'> <a href='details.php?id=" . $row['id'] . "' class='selectButton'>Details</a> 
+                <a href='update.php?id=" . $row['id'] . "' class='selectButton'>Update</a>
+                <a href='delete.php?id=" . $row['id'] . "' class='selectButton'>Delete</a>
         </td>";
 };
 
@@ -149,37 +149,6 @@ $html = "
     }
     .clearForm:hover {
         background-color: #d32f2f;
-    }
-
-    #confirmDiv {
-        display: none;
-        position: fixed;
-        z-index: 100;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.4);
-    }
-
-    #confirmContent {
-        background-color: #fefefe;
-        margin: 15% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 30%;
-        text-align: center;
-    }
-
-    #yesButton, #noButton {
-        background-color: #4CAF50;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 2.5%;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
     }
 </style>
 </head>

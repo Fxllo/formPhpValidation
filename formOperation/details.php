@@ -6,6 +6,7 @@ $sql = "SELECT * FROM student WHERE id = ". $id . "";
 $result = mysqli_query($conn, $sql);
 $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
+$content = "";
 $content .= "<tr>";
 $content .= "<td>" . $rows[0]["name"] . "</td>"
     . "<td>" . $rows[0]["surname"] . "</td>"
@@ -40,13 +41,28 @@ $html = "
         text-align: left;
         padding: 5px;
     }
-
     th {
         background-color: #f2f2f2;
+    }
+    .back-button {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 10px 20px;
+        background-color: #fff;
+        color: #333;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+    .back-button:hover {
+        background-color:#d4d4d4;
     }
     </style>
     </head>
     <body>
+        <a href='main.php' class='back-button'> Back to hub </a> 
         <center>
             <table>
                 <thead>
